@@ -56,6 +56,8 @@ local function set_keymap()
 	map("n", keys.close_tab_alt, close_tab, option)
 	map("n", keys.next_tab, ":BufferLineCycleNext<CR>", option)
 	map("n", keys.prev_tab, ":BufferLineCyclePrev<CR>", option)
+	map("n", keys.next_tab_alt, ":BufferLineCycleNext<CR>", option)
+	map("n", keys.prev_tab_alt, ":BufferLineCyclePrev<CR>", option)
 	map("n", keys.last_tab, "<C-^>", option)
 
 	-- <C-d>/<C-u> scroll 75% of the window instead of half

@@ -35,6 +35,27 @@ return {
 		end,
 	},
 
+	-- Highlight other uses of the word under the cursor (LSP, then Treesitter, then regex)
+	{
+		"RRethy/vim-illuminate",
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("illuminate").configure({
+				delay = 200,
+				large_file_cutoff = 10000,
+				filetypes_denylist = {
+					"alpha",
+					"neo-tree",
+					"aerial",
+					"toggleterm",
+					"TelescopePrompt",
+					"lazy",
+					"mason",
+				},
+			})
+		end,
+	},
+
 	-- Colors highlighting
 	{
 		"NvChad/nvim-colorizer.lua",

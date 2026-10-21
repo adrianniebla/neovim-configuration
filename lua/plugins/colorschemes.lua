@@ -47,6 +47,9 @@ return {
 						keyword_groups[group] = keyword
 					end
 					return vim.tbl_extend("force", keyword_groups, {
+						-- stronger visual selection (default waveBlue1 is hard to see on the background)
+						Visual = { bg = colors.palette.waveBlue2 },
+
 						-- modern telescope ui
 						TelescopeTitle = { fg = theme.ui.special, bold = true },
 						TelescopePromptNormal = { bg = theme.ui.bg_p1 },

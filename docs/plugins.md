@@ -20,6 +20,7 @@
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [neo-tree.lua](https://github.com/nvim-neo-tree/neo-tree.nvim)
 - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
+- [vim-illuminate](https://github.com/RRethy/vim-illuminate)
 - [nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)
 - [smart-splits.nvim](https://github.com/mrjones2014/smart-splits.nvim)
 - [bufdelete](https://github.com/famiu/bufdelete.nvim)

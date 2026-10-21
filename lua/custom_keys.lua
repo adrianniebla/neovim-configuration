@@ -22,6 +22,8 @@ return {
 	-- Use the shortcut to go to the next/previous buffer tab.
 	next_tab = "gt",
 	prev_tab = "gb",
+	next_tab_alt = "<A-l>",
+	prev_tab_alt = "<A-h>",
 	-- Use the shortcut to switch back and forth with the last used tab (like alt+tab).
 	last_tab = "<leader><leader>",
 
