@@ -60,6 +60,12 @@ local function set_keymap()
 	map("n", keys.prev_tab_alt, ":BufferLineCyclePrev<CR>", option)
 	map("n", keys.last_tab, "<C-^>", option)
 
+	-- System clipboard (the "+" register)
+	map("n", keys.clipboard_copy, '"+yy', option)
+	map("x", keys.clipboard_copy, '"+y', option)
+	map({ "n", "x" }, keys.clipboard_paste, '"+p', option)
+	map("i", keys.clipboard_paste, "<C-r>+", option)
+
 	-- <C-d>/<C-u> scroll 75% of the window instead of half
 	local function scroll_lines()
 		return math.max(math.floor(vim.api.nvim_win_get_height(0) * 0.75), 1)

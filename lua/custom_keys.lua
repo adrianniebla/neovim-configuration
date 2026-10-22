@@ -27,6 +27,11 @@ return {
 	-- Use the shortcut to switch back and forth with the last used tab (like alt+tab).
 	last_tab = "<leader><leader>",
 
+	-- Use the shortcut to copy to / paste from the system clipboard.
+	-- Copy takes the selection in visual mode, the current line in normal mode.
+	clipboard_copy = "<A-y>",
+	clipboard_paste = "<A-p>",
+
 	-- View other usage of the plugin: https://github.com/chentoast/marks.nvim
 	-- Marks show in the sign column; m<letter> sets one, dm<letter> deletes it.
 	mark_set_next = "m,", -- set the next free lowercase mark on this line
