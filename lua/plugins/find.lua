@@ -9,6 +9,9 @@ return {
         config = function()
             local actions = require('telescope.actions')
             local action_state = require('telescope.actions.state')
+            local keys = require("custom_keys")
+            -- same as Telescope's default <Tab>
+            local mark = actions.toggle_selection + actions.move_selection_worse
 
             -- <CR> opens the file in place of the current buffer tab (see
             -- lua/open_in_place.lua); <C-t> opens it as a new tab instead.
@@ -89,6 +92,7 @@ return {
                             ["<C-k>"] = actions.move_selection_previous,
                             -- first <C-c> leaves the prompt to normal mode, like <Esc>
                             ["<C-c>"] = function() vim.cmd("stopinsert") end,
+                            [keys.telescope_mark] = mark,
                             ["<CR>"] = open_selected,
                             ["<C-t>"] = actions.select_default, -- open as a new tab
                             ["<M-CR>"] = actions.select_default, -- Alt-Enter: same as <C-t>
@@ -100,6 +104,7 @@ return {
                             ["<C-k>"] = actions.move_selection_previous,
                             -- second <C-c> (now in normal mode) closes the search
                             ["<C-c>"] = actions.close,
+                            [keys.telescope_mark] = mark,
                             ["<CR>"] = open_selected,
                             ["<C-t>"] = actions.select_default, -- open as a new tab
                             ["<M-CR>"] = actions.select_default, -- Alt-Enter: same as <C-t>
@@ -140,7 +145,6 @@ return {
 
             local option = {noremap = true, silent = true }
 
-            local keys = require("custom_keys")
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', keys.find_files, builtin.find_files, option)
             vim.keymap.set('n', keys.find_files_case, function()

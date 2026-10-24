@@ -73,6 +73,9 @@ return {
 	live_grep_case = "<leader>GG",
 	search_cursor = "<leader>cc",
 	find_buffer = "<leader>bb",
+	-- Mark/unmark the current result like <Tab>, without letting go of Ctrl
+	-- while moving with <C-j>/<C-k>.
+	telescope_mark = "<C-i>",
 	-- Use the to close telescope window. <C-c> is the default setting, can't edit it here.
 	-- close_telescope  = "<C-c>",
 
