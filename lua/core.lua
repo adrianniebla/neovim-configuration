@@ -73,6 +73,10 @@ local function set_keymap()
 	map({ "n", "x" }, "<C-d>", function() return scroll_lines() .. "<C-d>" end, { expr = true, silent = true })
 	map({ "n", "x" }, "<C-u>", function() return scroll_lines() .. "<C-u>" end, { expr = true, silent = true })
 
+	-- Scroll the view one line (or [count]) and move the cursor with it, so it stays at the same screen row
+	map({ "n", "x" }, keys.scroll_line_down, function() return "<C-e>" .. vim.v.count1 .. "j" end, { expr = true, silent = true })
+	map({ "n", "x" }, keys.scroll_line_up, function() return "<C-y>" .. vim.v.count1 .. "k" end, { expr = true, silent = true })
+
 	-- Supported by nvim-tree
 	map("n", keys.file_explorer, ":Neotree position=left source=filesystem action=show toggle=true<CR>", option)
 	-- Same as above, but moves the cursor into the explorer
