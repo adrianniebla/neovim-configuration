@@ -32,6 +32,10 @@ return {
 	clipboard_copy = "<A-y>",
 	clipboard_paste = "<A-p>",
 
+	-- Use the shortcut to scroll the view one line, keeping the cursor at the same spot on the screen.
+	scroll_line_down = "<C-e>",
+	scroll_line_up = "<C-y>",
+
 	-- View other usage of the plugin: https://github.com/chentoast/marks.nvim
 	-- Marks show in the sign column; m<letter> sets one, dm<letter> deletes it.
 	mark_set_next = "m,", -- set the next free lowercase mark on this line
