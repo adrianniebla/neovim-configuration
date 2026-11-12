@@ -88,6 +88,51 @@ local function set_keymap()
 
 	-- Supported by diffview
 	map("n", keys.diff_open, ":DiffviewOpen<CR>", option)
+	-- Pick a branch in Telescope, then compare the current files against it.
+	-- Not Telescope's git_branches picker: its <CR> checks the branch out and
+	-- its <C-d> deletes it.
+	map("n", keys.diff_branch, function()
+		local branches = vim.fn.systemlist({
+			"git",
+			"for-each-ref",
+			"--sort=-committerdate",
+			"--format=%(refname:lstrip=2)",
+			"refs/heads",
+			"refs/remotes",
+		})
+		if vim.v.shell_error ~= 0 then
+			vim.notify("Not in a git repository", vim.log.levels.WARN)
+			return
+		end
+		-- drop remote default-branch pointers such as origin/HEAD
+		branches = vim.tbl_filter(function(branch)
+			return not branch:match("/HEAD$")
+		end, branches)
+
+		local actions = require("telescope.actions")
+		local action_state = require("telescope.actions.state")
+		require("telescope.pickers")
+			.new({}, {
+				prompt_title = "Diff against branch",
+				finder = require("telescope.finders").new_table({ results = branches }),
+				sorter = require("telescope.config").values.generic_sorter({}),
+				previewer = require("telescope.previewers").git_branch_log.new({}),
+				attach_mappings = function(prompt_bufnr, map_picker)
+					local function open_diff()
+						local entry = action_state.get_selected_entry()
+						actions.close(prompt_bufnr)
+						if entry then
+							vim.cmd({ cmd = "DiffviewOpen", args = { entry.value } })
+						end
+					end
+					-- <C-t>/<M-CR> run select_default; <CR> is mapped to open_selected globally
+					actions.select_default:replace(open_diff)
+					map_picker({ "i", "n" }, "<CR>", open_diff)
+					return true
+				end,
+			})
+			:find()
+	end, option)
 	map("n", keys.diff_close, ":DiffviewClose<CR>", option)
 
 	-- Supported by toggleterm

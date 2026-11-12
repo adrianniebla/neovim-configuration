@@ -50,6 +50,10 @@ return {
 						-- stronger visual selection (default waveBlue1 is hard to see on the background)
 						Visual = { bg = colors.palette.waveBlue2 },
 
+						-- changed lines in the sign column use the same green as added lines
+						-- (staged and change+delete signs follow it)
+						GitSignsChange = { fg = theme.vcs.added, bg = theme.ui.bg_gutter },
+
 						-- modern telescope ui
 						TelescopeTitle = { fg = theme.ui.special, bold = true },
 						TelescopePromptNormal = { bg = theme.ui.bg_p1 },

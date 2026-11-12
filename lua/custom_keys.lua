@@ -86,6 +86,8 @@ return {
 	-- View other usage of the plugin: https://github.com/sindrets/diffview.nvim
 	-- Use the shortcut to open 'git diff'.
 	diff_open = "<leader>df",
+	-- Use the shortcut to pick a branch and open 'git diff' against it.
+	diff_branch = "<leader>dm",
 	-- Use the shortcut to close 'git diff'.
 	diff_close = "<leader>dc",
 
