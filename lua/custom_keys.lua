@@ -88,6 +88,12 @@ return {
 	diff_open = "<leader>df",
 	-- Use the shortcut to pick a branch and open 'git diff' against it.
 	diff_branch = "<leader>dm",
+	-- Use the shortcut to pick a commit and open 'git diff' against it.
+	diff_commit = "<leader>dh",
+	-- In that commit list and in the commit graph, use the shortcut to show only the changes made in the selected commit.
+	diff_commit_only = "<C-o>",
+	-- Use the shortcut to show the commit graph of all branches (Enter on a commit opens 'git diff' against it).
+	diff_graph = "<leader>dl",
 	-- Use the shortcut to close 'git diff'.
 	diff_close = "<leader>dc",
 

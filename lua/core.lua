@@ -133,6 +133,56 @@ local function set_keymap()
 			})
 			:find()
 	end, option)
+	-- Pick a commit of the current branch in Telescope, then compare the
+	-- current files against it (or, with keys.diff_commit_only, show only the
+	-- changes made in that commit). Not Telescope's git_commits picker: its
+	-- <CR> checks the commit out and its <C-r>h runs `git reset --hard`.
+	map("n", keys.diff_commit, function()
+		local commits = vim.fn.systemlist({ "git", "log", "--date=short", "--format=%h %ad %s" })
+		if vim.v.shell_error ~= 0 then
+			vim.notify("Not in a git repository, or no commits yet", vim.log.levels.WARN)
+			return
+		end
+
+		local actions = require("telescope.actions")
+		local action_state = require("telescope.actions.state")
+		require("telescope.pickers")
+			.new({}, {
+				prompt_title = "Diff against commit",
+				finder = require("telescope.finders").new_table({
+					results = commits,
+					entry_maker = require("telescope.make_entry").gen_from_git_commits({}),
+				}),
+				sorter = require("telescope.config").values.generic_sorter({}),
+				-- the commit's message and changes (git show)
+				previewer = require("telescope.previewers").git_commit_diff_as_was.new({}),
+				attach_mappings = function(prompt_bufnr, map_picker)
+					-- suffix "^!" limits the diff to the commit's own changes
+					local function open_diff(suffix)
+						return function()
+							local entry = action_state.get_selected_entry()
+							actions.close(prompt_bufnr)
+							if entry then
+								vim.cmd({ cmd = "DiffviewOpen", args = { entry.value .. suffix } })
+							end
+						end
+					end
+					-- <C-t>/<M-CR> run select_default; <CR> is mapped to open_selected globally
+					actions.select_default:replace(open_diff(""))
+					map_picker({ "i", "n" }, "<CR>", open_diff(""))
+					map_picker({ "i", "n" }, keys.diff_commit_only, open_diff("^!"))
+					return true
+				end,
+			})
+			:find()
+	end, option)
+	-- Draw the commit graph of all branches (like `git lg2`) in the current
+	-- window. <CR> on a commit compares the current files against it,
+	-- keys.diff_commit_only shows only that commit's changes, and <CR> on a
+	-- visual selection the changes across those commits (see lua/plugins/git.lua).
+	map("n", keys.diff_graph, function()
+		require("gitgraph").draw({}, { all = true, max_count = 5000 })
+	end, option)
 	map("n", keys.diff_close, ":DiffviewClose<CR>", option)
 
 	-- Supported by toggleterm

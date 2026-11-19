@@ -7,6 +7,7 @@
 - [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [diffview.nvim](https://github.com/sindrets/diffview.nvim)
+- [gitgraph.nvim](https://github.com/isakbm/gitgraph.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
